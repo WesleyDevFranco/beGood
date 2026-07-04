@@ -1,0 +1,99 @@
+{
+  "titulo": "Entendendo async/await no seu projeto",
+  "projetoResumo": "Uma pequena aplicação em JavaScript que busca usuários de uma API e exibe uma lista. O foco é entender como o código lida (ou deveria lidar) com operações assíncronas.",
+  "temas": ["async/await", "Promises", "fetch", "tratamento de erros"],
+  "secoes": [
+    {
+      "id": "sec1",
+      "titulo": "Chamadas assíncronas no projeto",
+      "blocos": [
+        {
+          "tipo": "teoria",
+          "id": "sec1-teoria1",
+          "conteudo": "## Por que assíncrono?\n\nNo seu projeto, a função de busca chama a API e **espera** a resposta. Sem `async/await`, o código seguiria adiante antes dos dados chegarem — e você trabalharia com valores vazios.\n\nRepare como a função `buscar` do projeto usa `await`:\n\n```js\nasync function buscar(id) {\n  const res = await fetch(`/api/${id}`);\n  return res.json();\n}\n```\n\nO `await` **pausa** a função até a Promise resolver, deixando o código assíncrono com cara de síncrono."
+        },
+        {
+          "tipo": "exercicio",
+          "id": "sec1-exerc1",
+          "exercicio": {
+            "enunciado": "Com base na aula, reescreva a função `carregarUsuarios` para usar async/await ao buscar a lista de usuários em `/api/usuarios`.",
+            "codigoInicial": "// TODO: complete usando async/await\nfunction carregarUsuarios() {\n\n  // sua solução aqui\n\n}",
+            "linguagem": "javascript",
+            "solucaoReferencia": "async function carregarUsuarios() {\n  const res = await fetch('/api/usuarios');\n  return res.json();\n}",
+            "criteriosAvaliacao": [
+              "A função é declarada com async",
+              "Usa await no fetch",
+              "Retorna o resultado de res.json()"
+            ]
+          }
+        },
+        {
+          "tipo": "teoria",
+          "id": "sec1-teoria2",
+          "conteudo": "## O assincronismo sobe pela cadeia\n\nQuem **chama** uma função assíncrona também precisa lidar com o retorno usando `await` (ou `.then`). E há casos de borda que precisam de atenção: por exemplo, quando a lista vem **vazia**, seu código não deve quebrar ao tentar usá-la."
+        },
+        {
+          "tipo": "exercicio",
+          "id": "sec1-exerc2",
+          "exercicio": {
+            "enunciado": "Agora reescreva `carregarUsuarios` tratando o caso de lista vazia: se a API devolver uma lista sem itens, retorne um array vazio explicitamente.",
+            "codigoInicial": "async function carregarUsuarios() {\n  const res = await fetch('/api/usuarios');\n  // TODO: trate o caso de lista vazia\n  return res.json();\n}",
+            "linguagem": "javascript",
+            "solucaoReferencia": "async function carregarUsuarios() {\n  const res = await fetch('/api/usuarios');\n  const lista = await res.json();\n  if (!lista.length) return [];\n  return lista;\n}",
+            "criteriosAvaliacao": [
+              "Aguarda o res.json() em uma variável",
+              "Verifica se a lista está vazia antes de usá-la",
+              "Retorna [] quando não há itens"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "sec2",
+      "titulo": "Tratamento de erros",
+      "blocos": [
+        {
+          "tipo": "teoria",
+          "id": "sec2-teoria1",
+          "conteudo": "## E quando a requisição falha?\n\n`fetch` só rejeita a Promise em erros de rede — um status HTTP 404 ou 500 **não** lança erro sozinho. Por isso, é comum checar `res.ok` e lançar um erro explícito quando algo dá errado, para tratar com `try/catch`."
+        },
+        {
+          "tipo": "exercicio",
+          "id": "sec2-exerc1",
+          "exercicio": {
+            "enunciado": "Reescreva `carregarUsuarios` envolvendo a busca em try/catch e lançando um erro quando `res.ok` for falso.",
+            "codigoInicial": "async function carregarUsuarios() {\n  // TODO: use try/catch e verifique res.ok\n  const res = await fetch('/api/usuarios');\n  return res.json();\n}",
+            "linguagem": "javascript",
+            "solucaoReferencia": "async function carregarUsuarios() {\n  try {\n    const res = await fetch('/api/usuarios');\n    if (!res.ok) throw new Error('Falha ao buscar usuários');\n    return await res.json();\n  } catch (erro) {\n    console.error(erro);\n    return [];\n  }\n}",
+            "criteriosAvaliacao": [
+              "Envolve a busca em try/catch",
+              "Verifica res.ok e lança erro quando falso",
+              "Trata o erro no catch (ex.: log e retorno seguro)"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "referencias": [
+    {
+      "titulo": "MDN — Usando Promises",
+      "tipo": "documentacao",
+      "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Using_promises",
+      "porque": "Base conceitual do async/await: entender Promises deixa tudo mais claro."
+    },
+    {
+      "titulo": "MDN — fetch()",
+      "tipo": "documentacao",
+      "url": "https://developer.mozilla.org/pt-BR/docs/Web/API/Window/fetch",
+      "porque": "Detalha por que fetch não rejeita em erros HTTP e como checar res.ok."
+    },
+    {
+      "titulo": "O Event Loop do JavaScript",
+      "tipo": "video",
+      "url": null,
+      "porque": "Ajuda a visualizar por que o JavaScript é assíncrono por natureza."
+    }
+  ]
+}
