@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>beGood · Variação B — Empilhado</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+  </style>
+</head>
+<body class="h-screen flex flex-col bg-zinc-100 text-zinc-800">
+
+  <!-- Barra superior -->
+  <header class="flex items-center justify-between px-5 h-14 bg-white border-b border-zinc-200 shrink-0">
+    <div class="flex items-center gap-3">
+      <span class="font-bold text-emerald-600 text-lg">beGood</span>
+      <span class="text-zinc-300">/</span>
+      <span class="text-sm text-zinc-600">Entendendo async/await no seu projeto</span>
+    </div>
+    <div class="flex items-center gap-3 text-sm">
+      <div class="flex items-center gap-1.5">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+        <span class="w-2.5 h-2.5 rounded-full bg-zinc-300"></span>
+        <span class="w-2.5 h-2.5 rounded-full bg-zinc-300"></span>
+      </div>
+      <span class="text-zinc-500">Seção 2 de 4</span>
+    </div>
+  </header>
+
+  <!-- Corpo: empilhado (aula em cima, editor embaixo) -->
+  <div class="flex-1 flex flex-col min-h-0">
+
+    <!-- Cima: AULA (largura total, mais espaço pra leitura) -->
+    <section class="h-[42%] overflow-y-auto bg-white border-b border-zinc-200">
+      <div class="max-w-3xl mx-auto p-6">
+        <span class="inline-block text-xs font-semibold uppercase tracking-wide text-emerald-600 mb-2">Aula</span>
+        <h1 class="text-2xl font-bold mb-4">Por que usar async/await</h1>
+        <p class="mb-4 leading-relaxed">
+          No seu projeto, a função de busca chama a API e espera a resposta. Sem
+          <code class="code bg-zinc-100 px-1 rounded text-sm">async/await</code>, o código
+          continuaria antes dos dados chegarem — e você trabalharia com valores vazios.
+        </p>
+        <pre class="code bg-zinc-900 text-zinc-100 rounded-lg p-4 text-sm overflow-x-auto mb-4"><span class="text-purple-300">async function</span> buscar(id) {
+  <span class="text-purple-300">const</span> res = <span class="text-purple-300">await</span> fetch(<span class="text-emerald-300">`/api/${id}`</span>);
+  <span class="text-purple-300">return</span> res.json();
+}</pre>
+        <p class="leading-relaxed">
+          A palavra <code class="code bg-zinc-100 px-1 rounded text-sm">await</code> pausa a
+          função até a Promise resolver. Quem chama também precisa usar
+          <code class="code bg-zinc-100 px-1 rounded text-sm">await</code>.
+        </p>
+      </div>
+    </section>
+
+    <!-- Baixo: EXERCÍCIO + EDITOR -->
+    <section class="flex-1 flex flex-col min-h-0 bg-zinc-50">
+      <div class="px-6 py-3 border-b border-zinc-200 flex items-center justify-between">
+        <p class="text-sm">
+          <span class="text-xs font-semibold uppercase tracking-wide text-zinc-500 mr-2">Exercício</span>
+          Reescreva <code class="code">carregarUsuarios</code> com async/await e trate a lista vazia.
+        </p>
+        <button class="bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium px-4 py-2 rounded-lg shrink-0">
+          ▶ Revisar com IA
+        </button>
+      </div>
+
+      <div class="flex-1 flex min-h-0">
+        <!-- Editor (mock) -->
+        <div class="flex-1 bg-zinc-900 text-zinc-100 code text-sm overflow-auto">
+          <div class="flex">
+            <div class="text-zinc-600 text-right py-4 pl-4 pr-3 select-none">1<br>2<br>3<br>4<br>5<br>6</div>
+            <pre class="py-4 pr-4 flex-1"><span class="text-zinc-500">// TODO: complete usando async/await</span>
+<span class="text-purple-300">function</span> carregarUsuarios() {
+
+  <span class="text-zinc-500">// sua solução aqui</span>
+
+}
+</pre>
+          </div>
+        </div>
+
+        <!-- Resultado da revisão (painel lateral do editor) -->
+        <aside class="w-80 bg-white border-l border-zinc-200 p-4 overflow-y-auto shrink-0">
+          <div class="text-xs font-semibold uppercase tracking-wide text-zinc-500 mb-2">Revisão da IA</div>
+          <div class="rounded-lg border border-amber-300 bg-amber-50 p-3 text-sm">
+            <div class="text-amber-700 font-medium mb-1">❌ Tentativa 1 de 3</div>
+            <p class="text-amber-900">
+              <strong>Dica:</strong> faltou <code class="code">await</code> no
+              <code class="code">fetch</code> e o tratamento de lista vazia.
+            </p>
+          </div>
+          <p class="text-xs text-zinc-400 mt-3">A resposta completa só aparece após 3 tentativas.</p>
+        </aside>
+      </div>
+    </section>
+  </div>
+
+  <footer class="text-center text-xs text-zinc-400 py-1 bg-white border-t border-zinc-200">
+    Variação B — empilhado (aula em cima · editor embaixo). Mockup, dados falsos.
+  </footer>
+</body>
+</html>

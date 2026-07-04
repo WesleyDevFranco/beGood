@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>beGood · Caderno (notebook)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+  </style>
+</head>
+<body class="min-h-screen bg-zinc-100 text-zinc-800">
+
+  <!-- Barra superior fixa -->
+  <header class="sticky top-0 z-10 bg-white/90 backdrop-blur border-b border-zinc-200">
+    <div class="flex items-center justify-between px-5 h-14">
+      <div class="flex items-center gap-3">
+        <span class="font-bold text-emerald-600 text-lg">beGood</span>
+        <span class="text-zinc-300">/</span>
+        <span class="text-sm text-zinc-600">Entendendo async/await no seu projeto</span>
+      </div>
+      <div class="flex items-center gap-3 text-sm">
+        <span class="text-zinc-500">Exercício 2 de 5</span>
+      </div>
+    </div>
+    <!-- barra de progresso por exercícios -->
+    <div class="h-1 bg-zinc-200">
+      <div class="h-1 bg-emerald-500" style="width: 40%"></div>
+    </div>
+  </header>
+
+  <!-- Coluna única de leitura (mantém a coluna larga da B) -->
+  <main class="max-w-3xl mx-auto px-6 py-8 space-y-8">
+
+    <!-- ===== SEÇÃO 1 ===== -->
+    <div>
+      <div class="text-xs font-semibold uppercase tracking-wide text-emerald-600 mb-1">Seção 1</div>
+      <h2 class="text-2xl font-bold">Chamadas assíncronas no projeto</h2>
+    </div>
+
+    <!-- Bloco de teoria -->
+    <section class="prose-sm leading-relaxed space-y-3">
+      <p>
+        No seu projeto, a função de busca chama a API e espera a resposta. Sem
+        <code class="code bg-zinc-200 px-1 rounded text-sm">async/await</code>, o código
+        seguiria antes dos dados chegarem — e você trabalharia com valores vazios.
+      </p>
+      <pre class="code bg-zinc-900 text-zinc-100 rounded-lg p-4 text-sm overflow-x-auto"><span class="text-purple-300">async function</span> buscar(id) {
+  <span class="text-purple-300">const</span> res = <span class="text-purple-300">await</span> fetch(<span class="text-emerald-300">`/api/${id}`</span>);
+  <span class="text-purple-300">return</span> res.json();
+}</pre>
+    </section>
+
+    <!-- Célula de exercício — CONCLUÍDA -->
+    <section class="rounded-xl border border-emerald-300 bg-emerald-50 overflow-hidden">
+      <div class="flex items-center justify-between px-4 py-2.5 bg-emerald-100/60 border-b border-emerald-200">
+        <span class="text-sm font-medium text-emerald-800">✓ Exercício 1 — concluído</span>
+        <button class="text-xs text-emerald-700 hover:underline">ver meu código</button>
+      </div>
+    </section>
+
+    <!-- Bloco de teoria -->
+    <section class="prose-sm leading-relaxed space-y-3">
+      <p>
+        A palavra <code class="code bg-zinc-200 px-1 rounded text-sm">await</code> pausa a
+        função até a Promise resolver. Mas atenção: quem <em>chama</em> uma função async
+        também precisa lidar com o retorno — e casos de borda, como uma lista vazia,
+        precisam de tratamento explícito.
+      </p>
+    </section>
+
+    <!-- Célula de exercício — ATIVA -->
+    <section class="rounded-xl border-2 border-zinc-300 bg-white overflow-hidden shadow-sm">
+      <div class="flex items-center justify-between px-4 py-2.5 bg-zinc-50 border-b border-zinc-200">
+        <span class="text-sm font-medium text-zinc-800">Exercício 2</span>
+        <span class="text-xs text-zinc-500">JavaScript</span>
+      </div>
+      <div class="px-4 py-3 text-sm leading-relaxed border-b border-zinc-100">
+        Com base na aula, <strong>reescreva <code class="code">carregarUsuarios</code></strong>
+        usando async/await e tratando o caso de lista vazia.
+      </div>
+
+      <!-- editor (mock) -->
+      <div class="bg-zinc-900 text-zinc-100 code text-sm overflow-auto">
+        <div class="flex">
+          <div class="text-zinc-600 text-right py-3 pl-4 pr-3 select-none">1<br>2<br>3<br>4<br>5<br>6</div>
+          <pre class="py-3 pr-4 flex-1"><span class="text-zinc-500">// TODO: complete usando async/await</span>
+<span class="text-purple-300">function</span> carregarUsuarios() {
+
+  <span class="text-zinc-500">// sua solução aqui</span>
+
+}
+</pre>
+        </div>
+      </div>
+
+      <!-- ação + resultado -->
+      <div class="px-4 py-3">
+        <div class="flex justify-end">
+          <button id="btnRevisar" onclick="revisar()"
+            class="bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium px-4 py-2 rounded-lg">
+            ▶ Revisar com IA
+          </button>
+        </div>
+        <div id="resultado" class="mt-3 hidden"></div>
+      </div>
+    </section>
+
+    <!-- ===== SEÇÃO 2 (a fazer) ===== -->
+    <div class="pt-2">
+      <div class="text-xs font-semibold uppercase tracking-wide text-zinc-400 mb-1">Seção 2</div>
+      <h2 class="text-2xl font-bold text-zinc-400">Tratamento de erros</h2>
+    </div>
+    <section class="rounded-xl border border-dashed border-zinc-300 bg-white/50 px-4 py-6 text-center text-sm text-zinc-400">
+      🔒 Exercícios 3, 4 e 5 — liberados conforme você avança
+    </section>
+
+    <!-- Referências (aparecem no fim) -->
+    <section class="rounded-xl border border-zinc-200 bg-white p-5">
+      <div class="text-xs font-semibold uppercase tracking-wide text-zinc-500 mb-3">Para se aprofundar</div>
+      <ul class="space-y-2 text-sm">
+        <li>📄 <strong>MDN: Promises</strong> — a base do async/await.</li>
+        <li>🎥 <strong>Event loop em 10 min</strong> — por que o JS é assíncrono.</li>
+      </ul>
+    </section>
+  </main>
+
+  <script>
+    // Demonstra a regra dos 3 erros: dica → dica → resposta final.
+    let tentativa = 0;
+    function revisar() {
+      tentativa++;
+      const el = document.getElementById('resultado');
+      el.classList.remove('hidden');
+
+      if (tentativa < 3) {
+        el.innerHTML = `
+          <div class="rounded-lg border border-amber-300 bg-amber-50 p-3 text-sm">
+            <div class="text-amber-700 font-medium mb-1">❌ Tentativa ${tentativa} de 3</div>
+            <p class="text-amber-900"><strong>Dica:</strong> ${
+              tentativa === 1
+                ? 'faltou <code class="code">await</code> no <code class="code">fetch</code> — o retorno ainda é uma Promise.'
+                : 'quase lá! Agora trate quando a lista vier vazia antes de usá-la.'
+            }</p>
+          </div>`;
+      } else {
+        el.innerHTML = `
+          <div class="rounded-lg border border-emerald-300 bg-emerald-50 p-3 text-sm">
+            <div class="text-emerald-700 font-medium mb-2">💡 Resposta de referência (após 3 tentativas)</div>
+            <pre class="code bg-zinc-900 text-zinc-100 rounded-lg p-3 text-xs overflow-x-auto"><span class="text-purple-300">async function</span> carregarUsuarios() {
+  <span class="text-purple-300">const</span> res = <span class="text-purple-300">await</span> fetch(<span class="text-emerald-300">'/api/usuarios'</span>);
+  <span class="text-purple-300">const</span> lista = <span class="text-purple-300">await</span> res.json();
+  <span class="text-purple-300">if</span> (!lista.length) <span class="text-purple-300">return</span> [];
+  <span class="text-purple-300">return</span> lista;
+}</pre>
+          </div>`;
+        document.getElementById('btnRevisar').disabled = true;
+        document.getElementById('btnRevisar').classList.add('opacity-50', 'cursor-not-allowed');
+      }
+    }
+  </script>
+</body>
+</html>

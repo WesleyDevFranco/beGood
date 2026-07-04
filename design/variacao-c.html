@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>beGood · Variação C — Foco no editor</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+  </style>
+</head>
+<body class="h-screen flex flex-col bg-zinc-100 text-zinc-800">
+
+  <!-- Barra superior -->
+  <header class="flex items-center justify-between px-5 h-14 bg-white border-b border-zinc-200 shrink-0">
+    <div class="flex items-center gap-3">
+      <button onclick="toggleAula()" class="text-zinc-500 hover:text-zinc-800 text-sm border border-zinc-300 rounded px-2 py-1">
+        ☰ Aula
+      </button>
+      <span class="font-bold text-emerald-600 text-lg">beGood</span>
+      <span class="text-zinc-300">/</span>
+      <span class="text-sm text-zinc-600">Entendendo async/await no seu projeto</span>
+    </div>
+    <div class="flex items-center gap-3 text-sm">
+      <div class="flex items-center gap-1.5">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+        <span class="w-2.5 h-2.5 rounded-full bg-zinc-300"></span>
+        <span class="w-2.5 h-2.5 rounded-full bg-zinc-300"></span>
+      </div>
+      <span class="text-zinc-500">Seção 2 de 4</span>
+    </div>
+  </header>
+
+  <!-- Corpo: editor domina, aula em painel lateral retrátil -->
+  <div class="flex-1 flex min-h-0">
+
+    <!-- Painel lateral retrátil: AULA -->
+    <aside id="aula" class="w-96 overflow-y-auto p-6 bg-white border-r border-zinc-200 shrink-0 transition-all">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-xs font-semibold uppercase tracking-wide text-emerald-600">Aula</span>
+        <button onclick="toggleAula()" class="text-zinc-400 hover:text-zinc-700 text-sm">recolher →</button>
+      </div>
+      <h1 class="text-xl font-bold mb-3">Por que usar async/await</h1>
+      <p class="mb-3 text-sm leading-relaxed">
+        Sem <code class="code bg-zinc-100 px-1 rounded text-xs">async/await</code>, o código
+        continuaria antes dos dados chegarem — e você trabalharia com valores vazios.
+      </p>
+      <pre class="code bg-zinc-900 text-zinc-100 rounded-lg p-3 text-xs overflow-x-auto mb-3"><span class="text-purple-300">async function</span> buscar(id) {
+  <span class="text-purple-300">const</span> res = <span class="text-purple-300">await</span> fetch(...);
+  <span class="text-purple-300">return</span> res.json();
+}</pre>
+      <p class="text-sm leading-relaxed">
+        Quem chama <code class="code bg-zinc-100 px-1 rounded text-xs">buscar()</code> também
+        precisa usar <code class="code bg-zinc-100 px-1 rounded text-xs">await</code>.
+      </p>
+    </aside>
+
+    <!-- Área principal: EDITOR em destaque -->
+    <section class="flex-1 flex flex-col min-h-0 bg-zinc-50">
+      <div class="px-6 py-3 border-b border-zinc-200 bg-white">
+        <span class="text-xs font-semibold uppercase tracking-wide text-zinc-500 mr-2">Exercício</span>
+        <span class="text-sm">Reescreva <code class="code">carregarUsuarios</code> com async/await e trate a lista vazia.</span>
+      </div>
+
+      <!-- Editor grande (mock) -->
+      <div class="flex-1 bg-zinc-900 text-zinc-100 code text-sm overflow-auto min-h-0">
+        <div class="flex">
+          <div class="text-zinc-600 text-right py-4 pl-6 pr-3 select-none">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8</div>
+          <pre class="py-4 pr-4 flex-1"><span class="text-zinc-500">// TODO: complete usando async/await</span>
+<span class="text-purple-300">function</span> carregarUsuarios() {
+
+  <span class="text-zinc-500">// sua solução aqui</span>
+
+
+
+}
+</pre>
+        </div>
+      </div>
+
+      <!-- Barra de ação + resultado colapsável -->
+      <div class="border-t border-zinc-200 bg-white">
+        <div class="flex items-center justify-between px-6 py-3">
+          <div class="text-sm text-amber-700 font-medium">❌ Tentativa 1 de 3 · veja a dica →</div>
+          <button class="bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium px-5 py-2 rounded-lg">
+            ▶ Revisar com IA
+          </button>
+        </div>
+        <div class="px-6 pb-4">
+          <div class="rounded-lg border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900">
+            <strong>Dica:</strong> faltou <code class="code">await</code> no
+            <code class="code">fetch</code> e o tratamento de lista vazia.
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="text-center text-xs text-zinc-400 py-1 bg-white border-t border-zinc-200">
+    Variação C — foco no editor (aula em painel lateral retrátil, clique em "☰ Aula"). Mockup, dados falsos.
+  </footer>
+
+  <script>
+    function toggleAula() {
+      const el = document.getElementById('aula');
+      el.classList.toggle('hidden');
+    }
+  </script>
+</body>
+</html>
