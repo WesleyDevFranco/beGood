@@ -1,0 +1,20 @@
+node_modules/
+dist/
+.next/
+*.log
+
+# Segredos — NUNCA commitar
+.env
+.env.local
+.env.*.local
+
+# Aulas geradas (artefatos de saída) — o exemplo (data/aula.exemplo.json) fica versionado
+/aula*.json
+data/aula.atual.json
+
+# TypeScript / Next — artefatos gerados
+*.tsbuildinfo
+next-env.d.ts
+
+# Config local do editor/agent
+.claude/

@@ -1,0 +1,35 @@
+{
+  "name": "begood",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Transforma uma codebase num laboratório de aprendizado interativo.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "gerar-aula": "tsx scripts/gerar-aula.ts",
+    "begood": "tsx scripts/begood.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.110.0",
+    "@monaco-editor/react": "^4.7.0",
+    "next": "^16.2.10",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.2",
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "postcss": "^8.5.16",
+    "tailwindcss": "^4.3.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
