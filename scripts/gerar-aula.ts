@@ -32,9 +32,9 @@ async function main() {
   const dirProjeto = args[0];
   const saida = args[1] ?? AULA_ATUAL;
 
-  if (!process.env.ANTHROPIC_API_KEY) {
+  if (!process.env.ANTHROPIC_API_KEY && !process.env.ANTHROPIC_AUTH_TOKEN) {
     console.error(
-      "❌ ANTHROPIC_API_KEY não definida. Copie .env.example para .env.local e preencha a chave."
+      "❌ Credencial não definida. Defina ANTHROPIC_API_KEY (chave de API) ou ANTHROPIC_AUTH_TOKEN (token OAuth do `claude setup-token`) no .env.local."
     );
     process.exit(1);
   }

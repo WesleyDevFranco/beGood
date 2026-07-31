@@ -72,9 +72,9 @@ export async function POST(req: Request) {
     );
   }
 
-  if (!process.env.ANTHROPIC_API_KEY) {
+  if (!process.env.ANTHROPIC_API_KEY && !process.env.ANTHROPIC_AUTH_TOKEN) {
     return NextResponse.json(
-      { erro: "ANTHROPIC_API_KEY não configurada no servidor." },
+      { erro: "Credencial não configurada no servidor (ANTHROPIC_API_KEY ou ANTHROPIC_AUTH_TOKEN)." },
       { status: 500 }
     );
   }
